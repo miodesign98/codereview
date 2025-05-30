@@ -24,12 +24,15 @@
                             <img src="img/고객문의_color.png" alt="" class="image after">
                             <p>고객문의</p>
                         </button><!-- m_btn -->
+
 ```
+
 - [x] `heading` 태그는 순차적으로 구조화 진행 (`<h1>` `<h2>` `<h3>` ..)
 - [ ] 이미지 태그의 alt 속성 중 일부 누락, 접근성 개선을 위해 alt 속성 보완 필요
 - [x] `<h1>`태그는 footer 내 한 번만 사용되어 시멘틱 구조 적절함 (중복 사용 없음)
 - [x] 시멘틱 태그 `<header>`, `<main>`, `<section>`, `<footer>`를 적절히 활용해 문서 구조가 명확함
-- [ ] <label> 태그가 드롭다운 <select> 요소에 연결되어 있지 않음 사용자와 보조기술의 이해를 돕기 위해 <label> 추가 필요
+- [ ] `<label>` 태그가 드롭다운 `<select>` 요소에 연결되어 있지 않음 사용자와 보조기술의 이해를 돕기 위해 `<label>` 추가 필요
+
 ---
 
 ### 🎨 3. CSS 리뷰
@@ -43,74 +46,73 @@
 ---
 
 ### ⚙️ 4. JavaScript 리뷰
+
 ```javascript
+
 $(function () {
-    const sliders = [];
-```
-```
-$('.menu_slider').each(function (i, el) {
-        const swiper = new Swiper($(el).find('.swiper')[0], {
-            slidesPerView: 5,
-            spaceBetween: 20,
-            breakpoints: {
-                1024: { slidesPerView: 5 },
-                768: { slidesPerView: 4 },
-                360: { slidesPerView: 3 },
-                0: { slidesPerView: 2 },
-            },
-            loop: false,
-        });
-        sliders.push(swiper);
+  const sliders = [];
+
+  $('.menu_slider').each(function (i, el) {
+    const swiper = new Swiper($(el).find('.swiper')[0], {
+      slidesPerView: 5,
+      spaceBetween: 20,
+      breakpoints: {
+        1024: { slidesPerView: 5 },
+        768: { slidesPerView: 4 },
+        360: { slidesPerView: 3 },
+        0: { slidesPerView: 2 },
+      },
+      loop: false,
     });
-```
-```
-    $('.menu_tabs button').on('click', function () {
-        const target = $(this).data('target');
+    sliders.push(swiper);
+  });
 
-        $('.menu_tabs button').removeClass('active');
-        $(this).addClass('active');
+  $('.menu_tabs button').on('click', function () {
+    const target = $(this).data('target');
 
-        $('.menu_slider').removeClass('active');
-        $('.menu_slider.' + target).addClass('active');
-    });
-```
-```
-    let regionData = {
-        seoul: ["강남구", "서초구", "종로구", "마포구", "용산구"],
-        busan: ["해운대구", "수영구", "사하구", "중구", "연제구"],
-        daegu: ["중구", "동구", "서구", "달서구", "수성구"],
-        incheon: ["부평구", "남동구", "연수구", "서구", "중구"],
-        gwangju: ["동구", "서구", "남구", "북구", "광산구"]
-    };
+    $('.menu_tabs button').removeClass('active');
+    $(this).addClass('active');
+
+    $('.menu_slider').removeClass('active');
+    $('.menu_slider.' + target).addClass('active');
+  });
+
+  let regionData = {
+    seoul: ["강남구", "서초구", "종로구", "마포구", "용산구"],
+    busan: ["해운대구", "수영구", "사하구", "중구", "연제구"],
+    daegu: ["중구", "동구", "서구", "달서구", "수성구"],
+    incheon: ["부평구", "남동구", "연수구", "서구", "중구"],
+    gwangju: ["동구", "서구", "남구", "북구", "광산구"]
+  };
+});
 
 ```
+
 - 자바스크립트와 제이쿼리 구분을 위해 변수명 앞에 $ 추가함
 
 - [x] 메뉴 토글, 스크롤 애니메이션 등 기능 구현 완료
 - [x] 지역 선택에 따라 하위 지역을 동적으로 업데이트하는 로직으로 사용자 편의성 제고
 - [x] slidesPerView를 화면 크기별로 세분화해 반응형 UX 향상
 - [ ] 이벤트 핸들러에서 jQuery .on() 방식을 통일해 사용하면 일관성 및 확장성 증가
-- [ ] 스크립트 분리(현재 <script>가 HTML 내 임베디드 상태) 및 모듈화 고려
+- [ ] 스크립트 분리(현재 `<script>`가 HTML 내 임베디드 상태) 및 모듈화 고려
+
 ```javascript
-  $(".use-checkbox-top").change(function () {
-    if (
-      $(".use-checkbox-top:checked").length === $(".use-checkbox-top").length
-    ) {
-      btnSubmitTop.addClass("active");
-    } else {
-      btnSubmitTop.removeClass("active");
-    }
+
+ $('.menu_slider').each(function (i, el) {
+    const swiper = new Swiper($(el).find('.swiper')[0], {
+      slidesPerView: 5,
+      spaceBetween: 20,
+      breakpoints: {
+        1024: { slidesPerView: 5 },
+        768: { slidesPerView: 4 },
+        360: { slidesPerView: 3 },
+        0: { slidesPerView: 2 },
+      },
+      loop: false,
+    });
+    sliders.push(swiper);
   });
-  $(".use-checkbox-bottom").change(function () {
-    if (
-      $(".use-checkbox-bottom:checked").length ===
-      $(".use-checkbox-bottom").length
-    ) {
-      btnSubmitBottom.addClass("active");
-    } else {
-      btnSubmitBottom.removeClass("active");
-    }
-  });
+
 ```
 - 탭 전환 시 슬라이더가 정상적으로 초기화 및 리프레시되도록 처리 보완 필요
 
@@ -120,17 +122,13 @@ $('.menu_slider').each(function (i, el) {
 - [x] 인터랙션 요소에 hover 및 focus 스타일 제공
 - [x]  `nav_mobile` 메뉴와 토글 버튼이 존재하며, 미디어 쿼리로 모바일/PC 메뉴 구분 처리되어 있고, JS로 토글 이벤트도 연결된 상태
 - [ ] CSS에서 .section별 구분은 있지만 일부 섹션 내 요소들의 여백, 정렬이 조금 더 명확해지면 시각적 계층 구조가 더 개선될 수 있음
-- [ ] 
-<img src="https://github.com/user-attachments/assets/3934e497-461f-4bd4-9e6b-bc286d2ebf24" style="width: 500px;"/>
-
-- [ ] PPL과 영상 보러갈 수 있도록 링크 추가
-
+      
 ---
 
 ## 🛠️ 개선 계획 (To-Do)
-- [ ] `<h1>` 태그 구조 개선
-- [ ] JavaScript 함수명 정비
-- [ ] 로딩 애니메이션 추가
+- [ ] `<img>` 태그의 alt 속성이 일부 빈 값 또는 누락됨 접근성 향상을 위해 의미 있는 대체 텍스트 보완 필요
+- [ ] 메인 콘텐츠 중 제목 구조가 더 명확할 필요 있음
+- [ ] 이벤트 핸들러 등록 시 jQuery .on() 메서드로 통일
 - [ ] 불필요한 font파일 제거
 
 ---
