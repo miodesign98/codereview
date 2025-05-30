@@ -46,8 +46,9 @@
 ```javascript
 $(function () {
     const sliders = [];
-
-    $('.menu_slider').each(function (i, el) {
+```
+```
+$('.menu_slider').each(function (i, el) {
         const swiper = new Swiper($(el).find('.swiper')[0], {
             slidesPerView: 5,
             spaceBetween: 20,
@@ -61,7 +62,8 @@ $(function () {
         });
         sliders.push(swiper);
     });
-
+```
+```
     $('.menu_tabs button').on('click', function () {
         const target = $(this).data('target');
 
@@ -71,7 +73,8 @@ $(function () {
         $('.menu_slider').removeClass('active');
         $('.menu_slider.' + target).addClass('active');
     });
-
+```
+```
     let regionData = {
         seoul: ["강남구", "서초구", "종로구", "마포구", "용산구"],
         busan: ["해운대구", "수영구", "사하구", "중구", "연제구"],
